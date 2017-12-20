@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import net.rossharper.kleanplayer.KleanPlayerApp
 import net.rossharper.kleanplayer.R
-import net.rossharper.kleanplayer.home.view.HomeFragment
+import net.rossharper.kleanplayer.home.view.android.HomeFragment
 
 class MainActivity : AppCompatActivity() {
 

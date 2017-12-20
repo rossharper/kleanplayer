@@ -18,7 +18,7 @@ class ViewModelProviderFactory : ViewModelProvider.Factory {
             modelClass.isAssignableFrom(MainViewModel::class.java) -> createMainViewModel()
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> createHomeViewModel()
             else -> throw IllegalArgumentException("Unknown Model Class Name")
-        } as T
+        } as T // TODO: can the unchecked cast be dealt with?
     }
 }
 

@@ -1,4 +1,4 @@
-package net.rossharper.kleanplayer.home.view
+package net.rossharper.kleanplayer.home.view.android
 
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -10,8 +10,10 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_home.*
 import net.rossharper.kleanplayer.KleanPlayerApp
 import net.rossharper.kleanplayer.R
-import net.rossharper.kleanplayer.home.presenter.HomeViewState
-import net.rossharper.kleanplayer.home.view.sections.HomeSectionsAdapter
+import net.rossharper.kleanplayer.home.view.HomeViewModel
+
+import net.rossharper.kleanplayer.home.view.ViewGateway.HomeViewState
+import net.rossharper.kleanplayer.home.view.android.sections.HomeSectionsAdapter
 
 
 class HomeFragment : Fragment() {
@@ -64,7 +66,7 @@ class HomeFragment : Fragment() {
                 showDataView()
                 hideErrorView()
                 hideLoadingView()
-                adapter.items = homeStreamViewModel.sectionViewModels
+                adapter.items = homeStreamViewModel.sections
             }
         }
     }

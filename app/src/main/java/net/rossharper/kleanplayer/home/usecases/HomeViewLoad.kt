@@ -2,16 +2,14 @@ package net.rossharper.kleanplayer.home.usecases
 
 import kotlinx.coroutines.experimental.delay
 import net.rossharper.kleanplayer.home.HomeStreamGateway
-import net.rossharper.kleanplayer.home.presenter.HomeViewState
-import net.rossharper.kleanplayer.home.view.HomeStreamViewModel
-import net.rossharper.kleanplayer.home.view.SectionViewModel
+import net.rossharper.kleanplayer.home.view.ViewGateway
 
 interface HomeViewLoadInput {
     suspend fun execute()
 }
 
 interface HomeViewLoadOutput {
-    fun updateState(state: HomeViewState)
+    fun updateState(state: ViewGateway.HomeViewState) // TODO: wrong for view state to be here, DomainState?
 }
 
 class HomeViewLoadInteractor(
@@ -19,7 +17,7 @@ class HomeViewLoadInteractor(
         private val homeStreamGateway: HomeStreamGateway
 ) : HomeViewLoadInput {
     suspend override fun execute() {
-        output.updateState(HomeViewState.Loading())
+        output.updateState(ViewGateway.HomeViewState.Loading())
 
         delay(1500)
 
@@ -31,17 +29,17 @@ class HomeViewLoadInteractor(
 
                 if(Math.random() > 0.25) {
 
-                    output.updateState(HomeViewState.Success(
-                            HomeStreamViewModel(result.homeStream.sections.map {
-                                SectionViewModel(it.title)
+                    output.updateState(ViewGateway.HomeViewState.Success(
+                            ViewGateway.HomeStream(result.homeStream.sections.map {
+                                ViewGateway.Section(it.title)
                             })))
 
                 } else {
-                    output.updateState(HomeViewState.Error())
+                    output.updateState(ViewGateway.HomeViewState.Error())
                 }
             }
             is HomeStreamGateway.Result.Error -> {
-                output.updateState(HomeViewState.Error())
+                output.updateState(ViewGateway.HomeViewState.Error())
             }
         }
     }

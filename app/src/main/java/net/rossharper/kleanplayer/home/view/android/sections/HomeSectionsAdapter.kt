@@ -1,14 +1,14 @@
-package net.rossharper.kleanplayer.home.view.sections
+package net.rossharper.kleanplayer.home.view.android.sections
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import net.rossharper.kleanplayer.R
-import net.rossharper.kleanplayer.home.view.SectionViewModel
+import net.rossharper.kleanplayer.home.view.ViewGateway.Section
 
 class HomeSectionsAdapter : RecyclerView.Adapter<SectionViewHolder>() {
 
-    var items: List<SectionViewModel> = emptyList()
+    var items: List<Section> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
