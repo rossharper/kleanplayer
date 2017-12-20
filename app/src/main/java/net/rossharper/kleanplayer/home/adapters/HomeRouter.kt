@@ -1,9 +1,12 @@
-package net.rossharper.kleanplayer.home.router
+package net.rossharper.kleanplayer.home.adapters
 
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import net.rossharper.kleanplayer.home.domain.Item
+import net.rossharper.kleanplayer.showPage.ShowPageActivity
 
-class HomeRouter {
+class HomeRouter(private val context: Context) {
     fun launchShowPage(showItem: Item.ShowItem) {
         /*
         This is where we'd like to launch the onward show page.
@@ -15,5 +18,10 @@ class HomeRouter {
         handle?
          */
         Log.i("TODO", "Launch show page ${showItem.title}")
+        // This is an application context, any problems doing this?
+        val intent = Intent(context, ShowPageActivity::class.java).apply {
+            putExtra(ShowPageActivity.ShowIdExtra, showItem.id)
+        }
+        context.startActivity(intent)
     }
 }
