@@ -3,7 +3,35 @@
     "sections": [
       {
         "id": "s1",
-        "title": "Section One"
+        "title": "Shows we recommend",
+        "entities": [
+          {
+            "__typename": "ShowEntity",
+            "id": "show001",
+            "title": "Green Planet"
+          },
+          {
+            "__typename": "ShowEntity",
+            "id": "show002",
+            "title": "Abdication Avenue"
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "title": "Shows you are watching",
+        "entities": [
+          {
+            "__typename": "ShowEntity",
+            "id": "show003",
+            "title": "Fixing Good"
+          },
+          {
+            "__typename": "ShowEntity",
+            "id": "show004",
+            "title": "Ms Android"
+          }
+        ]
       }
     ]
   }
