@@ -3,6 +3,7 @@ package net.rossharper.kleanplayer.home.usecases
 import kotlinx.coroutines.experimental.delay
 import net.rossharper.kleanplayer.home.HomeStreamGateway
 import net.rossharper.kleanplayer.home.domain.HomeState
+import net.rossharper.kleanplayer.home.domain.StateHolder
 
 interface HomeViewLoadInput {
     suspend fun execute()
@@ -13,8 +14,9 @@ interface HomeViewLoadOutput {
 }
 
 class HomeViewLoadInteractor(
-        private val output: HomeViewLoadOutput,
-        private val homeStreamGateway: HomeStreamGateway
+        private val stateHolder: StateHolder,
+        private val homeStreamGateway: HomeStreamGateway,
+        private val output: HomeViewLoadOutput
 ) : HomeViewLoadInput {
     suspend override fun execute() {
         output.updateState(HomeState.Loading)
@@ -22,9 +24,12 @@ class HomeViewLoadInteractor(
         delay(1500)
 
         val result = homeStreamGateway.getHome()
-        when (result) {
-            is HomeStreamGateway.Result.Success -> output.updateState(HomeState.Loaded(result.homeStream))
-            is HomeStreamGateway.Result.Error -> output.updateState(HomeState.Error)
+        val newState = when (result) {
+            is HomeStreamGateway.Result.Success -> HomeState.Loaded(result.homeStream)
+            is HomeStreamGateway.Result.Error -> HomeState.Error
         }
+
+        stateHolder.state = newState
+        output.updateState(newState) // TODO: could observe the above instead?
     }
 }

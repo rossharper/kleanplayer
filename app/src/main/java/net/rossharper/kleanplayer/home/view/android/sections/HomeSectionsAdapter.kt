@@ -14,10 +14,15 @@ class HomeSectionsAdapter : RecyclerView.Adapter<SectionViewHolder>() {
             notifyDataSetChanged()
         }
 
+    var sectionItemSelectionListener : SectionItemSelectionListener? = null
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): SectionViewHolder {
         val sectionView = LayoutInflater.from(parent!!.context)
                 .inflate(R.layout.section, parent, false)
-        return SectionViewHolder(sectionView)
+        return SectionViewHolder(sectionView, SectionItemsAdapter(), {
+            sectionPosition, itemPosition ->
+            sectionItemSelectionListener?.invoke(sectionPosition, itemPosition)
+        })
     }
 
     override fun getItemCount(): Int = sections.size

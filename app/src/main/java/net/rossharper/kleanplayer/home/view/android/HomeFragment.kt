@@ -37,6 +37,10 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
 
+        adapter.sectionItemSelectionListener = { sectionPosition, itemPosition ->
+            viewModel.onItemSelected(sectionPosition, itemPosition)
+        }
+
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.onRefresh()
         }
