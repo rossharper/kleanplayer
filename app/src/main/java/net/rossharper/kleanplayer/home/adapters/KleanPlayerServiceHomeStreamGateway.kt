@@ -2,16 +2,20 @@ package net.rossharper.kleanplayer.home.adapters
 
 import net.rossharper.kleanplayer.home.HomeStreamGateway
 import net.rossharper.kleanplayer.home.domain.HomeStream
+import net.rossharper.kleanplayer.home.domain.Item
 import net.rossharper.kleanplayer.home.domain.Section
 import net.rossharper.kleanserviceclient.HomeFetchResult
 import net.rossharper.kleanserviceclient.KleanServiceClient
 import net.rossharper.kleanserviceclient.createKleanServiceClient
+import net.rossharper.kleanserviceclient.datamodel.KleanServiceEntity
+import net.rossharper.kleanserviceclient.datamodel.KleanServiceHomeStream
+import net.rossharper.kleanserviceclient.datamodel.KleanServiceSection
+import net.rossharper.kleanserviceclient.datamodel.KleanServiceShowEntity
 
 fun createHomeStreamGateway(): HomeStreamGateway {
     val httpGateway = createHttpGateway()
     val kleanServiceClient = createKleanServiceClient(httpGateway)
-    val homeStreamGateway = KleanPlayerServiceHomeStreamGateway(kleanServiceClient)
-    return homeStreamGateway
+    return KleanPlayerServiceHomeStreamGateway(kleanServiceClient)
 }
 
 private class KleanPlayerServiceHomeStreamGateway(private val kleanServiceClient: KleanServiceClient) : HomeStreamGateway {
@@ -19,11 +23,24 @@ private class KleanPlayerServiceHomeStreamGateway(private val kleanServiceClient
         val result = kleanServiceClient.fetchHome()
         return when(result) {
             is HomeFetchResult.Success -> {
-                HomeStreamGateway.Result.Success(HomeStream(result.homeStream.view.sections.map {
-                    Section(it.id, it.title)
-                }))
+                HomeStreamGateway.Result.Success(result.homeStream.transformToDomainModel())
             }
             is HomeFetchResult.Error -> HomeStreamGateway.Result.Error(result.errorMessage)
         }
+    }
+}
+
+private fun KleanServiceHomeStream.transformToDomainModel() : HomeStream {
+    return HomeStream(this.view.sections.map{ it.toDomainModel() })
+}
+
+private fun KleanServiceSection.toDomainModel(): Section {
+    return Section(id, title, entities.mapNotNull { it.toDomainModel() })
+}
+
+private fun KleanServiceEntity.toDomainModel() : Item? {
+    return when(this) {
+        is KleanServiceShowEntity -> Item.ShowItem(id, title)
+        else -> null
     }
 }

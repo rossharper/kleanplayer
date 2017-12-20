@@ -10,5 +10,8 @@ interface ViewGateway {
     }
 
     data class HomeStream(val sections: List<Section>)
-    data class Section(val title: String)
+    data class Section(val title: String, val items: List<Item>)
+    sealed class Item {
+        data class ShowItem(val title: String) : Item()
+    }
 }

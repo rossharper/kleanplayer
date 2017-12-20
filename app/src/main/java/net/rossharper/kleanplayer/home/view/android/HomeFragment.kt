@@ -66,7 +66,7 @@ class HomeFragment : Fragment() {
                 showDataView()
                 hideErrorView()
                 hideLoadingView()
-                adapter.items = homeStreamViewModel.sections
+                adapter.sections = homeStreamViewModel.sections
             }
         }
     }

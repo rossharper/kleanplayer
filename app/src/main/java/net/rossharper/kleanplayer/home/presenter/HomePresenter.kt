@@ -2,6 +2,7 @@ package net.rossharper.kleanplayer.home.presenter
 
 import net.rossharper.kleanplayer.home.domain.HomeState
 import net.rossharper.kleanplayer.home.domain.HomeStream
+import net.rossharper.kleanplayer.home.domain.Item
 import net.rossharper.kleanplayer.home.domain.Section
 import net.rossharper.kleanplayer.home.usecases.HomeViewLoadOutput
 import net.rossharper.kleanplayer.home.view.ViewGateway
@@ -26,6 +27,12 @@ private fun HomeStream.toViewModels(): ViewGateway.HomeStream {
 private fun List<Section>.toViewModels(): List<ViewGateway.Section> {
     return this.map {
         domainSection ->
-        ViewGateway.Section(domainSection.title)
+        ViewGateway.Section(domainSection.title, domainSection.items.map { it.toViewModel() })
+    }
+}
+
+private fun Item.toViewModel(): ViewGateway.Item {
+    return when (this) {
+        is Item.ShowItem -> ViewGateway.Item.ShowItem(title)
     }
 }

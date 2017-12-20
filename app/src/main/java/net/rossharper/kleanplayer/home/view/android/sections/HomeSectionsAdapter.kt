@@ -8,21 +8,21 @@ import net.rossharper.kleanplayer.home.view.ViewGateway.Section
 
 class HomeSectionsAdapter : RecyclerView.Adapter<SectionViewHolder>() {
 
-    var items: List<Section> = emptyList()
+    var sections: List<Section> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): SectionViewHolder {
-        val itemView = LayoutInflater.from(parent!!.context)
+        val sectionView = LayoutInflater.from(parent!!.context)
                 .inflate(R.layout.section, parent, false)
-        return SectionViewHolder(itemView)
+        return SectionViewHolder(sectionView)
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = sections.size
 
     override fun onBindViewHolder(holder: SectionViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(sections[position])
     }
 }

@@ -5,27 +5,27 @@ import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import net.rossharper.kleanserviceclient.JsonParser
-import net.rossharper.kleanserviceclient.datamodel.Entity
+import net.rossharper.kleanserviceclient.datamodel.KleanServiceEntity
 import net.rossharper.kleanserviceclient.datamodel.KleanServiceHomeStream
-import net.rossharper.kleanserviceclient.datamodel.ShowEntity
+import net.rossharper.kleanserviceclient.datamodel.KleanServiceShowEntity
 import java.lang.reflect.Type
 
-class HomeParser : JsonParser<KleanServiceHomeStream> {
+internal class HomeParser : JsonParser<KleanServiceHomeStream> {
     override fun parse(json: String): KleanServiceHomeStream =
             GsonBuilder()
-                    .registerTypeHierarchyAdapter(Entity::class.java, EntityDeserializer())
+                    .registerTypeHierarchyAdapter(KleanServiceEntity::class.java, EntityDeserializer())
                     .create()
                     .fromJson(json, KleanServiceHomeStream::class.java)
 }
 
-class EntityDeserializer : JsonDeserializer<Entity?> {
+private class EntityDeserializer : JsonDeserializer<KleanServiceEntity?> {
 
     val gson = GsonBuilder().create()
 
-    override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): Entity? {
+    override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): KleanServiceEntity? {
         val jsonObject = json.asJsonObject
         return when (jsonObject["__typename"].asString) {
-            "ShowEntity" -> gson.fromJson(jsonObject, ShowEntity::class.java)
+            "ShowEntity" -> gson.fromJson(jsonObject, KleanServiceShowEntity::class.java)
             else -> null
         }
     }
