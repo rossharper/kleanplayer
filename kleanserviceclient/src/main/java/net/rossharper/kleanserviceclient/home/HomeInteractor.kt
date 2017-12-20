@@ -5,7 +5,7 @@ import net.rossharper.kleanserviceclient.JsonFetcher
 import net.rossharper.kleanserviceclient.JsonParser
 
 
-class HomeInteractor(private val homeFetcher: HomeFetcher, private val homeParser: HomeParser) {
+class HomeInteractor(private val homeFetcher: JsonFetcher, private val homeParser: HomeParser) {
     fun fetchHomeStream(): HomeFetchResult {
         val fetchResult = homeFetcher.fetch()
         return when (fetchResult) {

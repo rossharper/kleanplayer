@@ -5,7 +5,7 @@ import net.rossharper.kleanserviceclient.JsonFetcher
 
 class HomeFetcher(private val httpGateway: HttpGateway) : JsonFetcher {
     override fun fetch(): JsonFetcher.Result {
-        val request = httpGateway.requestBuilder().url("https://raw.githubusercontent.com/rossharper/kleanplayer/master/data.json").build()
+        val request = httpGateway.requestBuilder().url("https://raw.githubusercontent.com/rossharper/kleanplayer/master/kleanserviceclient/src/main/resources/data.json").build()
         val response = httpGateway.execute(request)
         return when(response) {
             is HttpGateway.Response.Success -> JsonFetcher.Result.Success(response.body)

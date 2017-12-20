@@ -7,6 +7,6 @@ import net.rossharper.kleanplayer.home.view.ViewGateway.Section
 
 class SectionViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
     fun bind(item: Section) {
-        itemView.textView.text = item.title
+        itemView.sectionTitle.text = item.title
     }
 }
