@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
                 hideDataView()
                 hideLoadingView()
             }
-            is HomeViewState.Success -> {
+            is HomeViewState.Loaded -> {
                 showDataView()
                 hideErrorView()
                 hideLoadingView()
