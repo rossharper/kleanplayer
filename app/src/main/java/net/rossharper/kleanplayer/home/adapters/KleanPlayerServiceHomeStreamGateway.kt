@@ -29,16 +29,16 @@ private class KleanPlayerServiceHomeStreamGateway(private val kleanServiceClient
         }
     }
 }
-
+    
 private fun KleanServiceHomeStream.transformToDomainModel() : HomeStream {
-    return HomeStream(this.view.sections.map{ it.toDomainModel() })
+    return HomeStream(this.view.sections.map{ it.transformToDomainModel() })
 }
 
-private fun KleanServiceSection.toDomainModel(): Section {
-    return Section(id, title, entities.mapNotNull { it.toDomainModel() })
+private fun KleanServiceSection.transformToDomainModel(): Section {
+    return Section(id, title, entities.mapNotNull { it.transformToDomainModel() })
 }
 
-private fun KleanServiceEntity.toDomainModel() : Item? {
+private fun KleanServiceEntity.transformToDomainModel() : Item? {
     return when(this) {
         is KleanServiceShowEntity -> Item.ShowItem(id, title)
         else -> null

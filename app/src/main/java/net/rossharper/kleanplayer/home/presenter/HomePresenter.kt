@@ -13,25 +13,25 @@ class HomePresenter : HomeViewLoadOutput {
     override fun updateState(state: HomeState) {
         val homeViewState = when (state) {
             is HomeState.Loading -> ViewGateway.HomeViewState.Loading
-            is HomeState.Loaded -> ViewGateway.HomeViewState.Loaded(state.homeStream.toViewModels())
+            is HomeState.Loaded -> ViewGateway.HomeViewState.Loaded(state.homeStream.transformToViewModels())
             is HomeState.Error -> ViewGateway.HomeViewState.Error
         }
         viewGateway.updateView(homeViewState)
     }
 }
 
-private fun HomeStream.toViewModels(): ViewGateway.HomeStream {
-    return ViewGateway.HomeStream(this.sections.toViewModels())
+private fun HomeStream.transformToViewModels(): ViewGateway.HomeStream {
+    return ViewGateway.HomeStream(this.sections.transformToViewModels())
 }
 
-private fun List<Section>.toViewModels(): List<ViewGateway.Section> {
+private fun List<Section>.transformToViewModels(): List<ViewGateway.Section> {
     return this.map {
         domainSection ->
-        ViewGateway.Section(domainSection.title, domainSection.items.map { it.toViewModel() })
+        ViewGateway.Section(domainSection.title, domainSection.items.map { it.transformToViewModel() })
     }
 }
 
-private fun Item.toViewModel(): ViewGateway.Item {
+private fun Item.transformToViewModel(): ViewGateway.Item {
     return when (this) {
         is Item.ShowItem -> ViewGateway.Item.ShowItem(title)
     }
