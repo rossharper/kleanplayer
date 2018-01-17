@@ -29,7 +29,7 @@ private class KleanPlayerServiceHomeStreamGateway(private val kleanServiceClient
         }
     }
 }
-    
+
 private fun KleanServiceHomeStream.transformToDomainModel() : HomeStream {
     return HomeStream(this.view.sections.map{ it.transformToDomainModel() })
 }

@@ -1,5 +1,6 @@
 package net.rossharper.kleanplayer.home.presenter
 
+import net.rossharper.kleanplayer.home.adapters.HomeRouter
 import net.rossharper.kleanplayer.home.domain.HomeState
 import net.rossharper.kleanplayer.home.domain.HomeStream
 import net.rossharper.kleanplayer.home.domain.Item
@@ -7,8 +8,9 @@ import net.rossharper.kleanplayer.home.domain.Section
 import net.rossharper.kleanplayer.home.usecases.HomeViewLoadOutput
 import net.rossharper.kleanplayer.home.view.ViewGateway
 
-class HomePresenter : HomeViewLoadOutput {
+class HomePresenter : HomeViewLoadOutput, HomeRouter {
     lateinit var viewGateway : ViewGateway
+    lateinit var router : HomeRouter
 
     override fun updateState(state: HomeState) {
         val homeViewState = when (state) {
@@ -17,6 +19,10 @@ class HomePresenter : HomeViewLoadOutput {
             is HomeState.Error -> ViewGateway.HomeViewState.Error
         }
         viewGateway.updateView(homeViewState)
+    }
+
+    override fun launchShowPage(showItem: Item.ShowItem) {
+        router.launchShowPage(showItem)
     }
 }
 

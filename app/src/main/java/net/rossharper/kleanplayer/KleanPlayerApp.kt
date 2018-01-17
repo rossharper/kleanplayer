@@ -10,14 +10,14 @@ import net.rossharper.kleanplayer.main.MainViewModel
 import net.rossharper.kleanplayer.main.createMainViewModel
 
 class KleanPlayerApp : Application() {
-    val viewModelProviderFactory = ViewModelProviderFactory(this)
+    val viewModelProviderFactory = ViewModelProviderFactory()
 }
 
-class ViewModelProviderFactory(private val context: Context) : ViewModelProvider.Factory {
+class ViewModelProviderFactory() : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(MainViewModel::class.java) -> createMainViewModel()
-            modelClass.isAssignableFrom(HomeViewModel::class.java) -> createHomeViewModel(context)
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> createHomeViewModel()
             else -> throw IllegalArgumentException("Unknown Model Class Name")
         } as T // TODO: can the unchecked cast be dealt with?
     }

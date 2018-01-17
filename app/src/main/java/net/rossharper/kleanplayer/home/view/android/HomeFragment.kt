@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_home.*
 import net.rossharper.kleanplayer.KleanPlayerApp
 import net.rossharper.kleanplayer.R
+import net.rossharper.kleanplayer.home.adapters.AndroidHomeRouter
 import net.rossharper.kleanplayer.home.view.HomeViewModel
 
 import net.rossharper.kleanplayer.home.view.ViewGateway.HomeViewState
@@ -28,6 +29,9 @@ class HomeFragment : Fragment() {
                 .of(this, (context.applicationContext as KleanPlayerApp)
                         .viewModelProviderFactory)
                 .get(HomeViewModel::class.java)
+
+        viewModel.router = AndroidHomeRouter(context)
+
         return view
     }
 
