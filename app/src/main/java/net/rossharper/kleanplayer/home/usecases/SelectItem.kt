@@ -1,6 +1,6 @@
 package net.rossharper.kleanplayer.home.usecases
 
-import net.rossharper.kleanplayer.home.adapters.HomeRouter
+import net.rossharper.kleanplayer.home.HomeRouter
 import net.rossharper.kleanplayer.home.domain.HomeState
 import net.rossharper.kleanplayer.home.domain.Item
 import net.rossharper.kleanplayer.home.domain.StateHolder

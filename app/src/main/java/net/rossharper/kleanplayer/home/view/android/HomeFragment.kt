@@ -26,8 +26,8 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_home, container, false)
         viewModel = ViewModelProviders
-                .of(this, (context.applicationContext as KleanPlayerApp)
-                        .viewModelProviderFactory)
+                .of(this,
+                        (context.applicationContext as KleanPlayerApp).viewModelProviderFactory)
                 .get(HomeViewModel::class.java)
 
         viewModel.router = AndroidHomeRouter(context)

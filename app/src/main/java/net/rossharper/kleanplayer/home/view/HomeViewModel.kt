@@ -2,8 +2,8 @@ package net.rossharper.kleanplayer.home.view
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import net.rossharper.kleanplayer.home.HomeRouter
 import net.rossharper.kleanplayer.home.HomeViewEventListener
-import net.rossharper.kleanplayer.home.adapters.HomeRouter
 import net.rossharper.kleanplayer.home.adapters.createHomeStreamGateway
 import net.rossharper.kleanplayer.home.controller.HomeController
 import net.rossharper.kleanplayer.home.domain.Item
@@ -41,3 +41,4 @@ class HomeViewModel(controller: HomeViewEventListener)
         router?.launchShowPage(showItem)
     }
 }
+

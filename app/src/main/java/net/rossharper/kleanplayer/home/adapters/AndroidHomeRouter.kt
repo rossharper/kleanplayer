@@ -1,7 +1,7 @@
 package net.rossharper.kleanplayer.home.adapters
 
 import android.content.Context
-import net.rossharper.kleanplayer.home.adapters.HomeRouter
+import net.rossharper.kleanplayer.home.HomeRouter
 import net.rossharper.kleanplayer.home.domain.Item
 import net.rossharper.kleanplayer.showPage.ShowId
 
