@@ -1,4 +1,4 @@
-package net.rossharper.kleanplayer.home.adapters
+package net.rossharper.kleanplayer.kleanservice
 
 import net.rossharper.kleanserviceclient.HttpGateway
 import okhttp3.OkHttpClient

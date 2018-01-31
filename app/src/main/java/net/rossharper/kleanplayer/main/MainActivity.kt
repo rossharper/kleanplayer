@@ -15,21 +15,31 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val viewModel = ViewModelProviders
-                .of(this, (application as KleanPlayerApp).viewModelProviderFactory)
-                .get(MainViewModel::class.java)
 
-        viewModel.mainViewLiveData
-                .observe(this, Observer<MainViewState> {
-                    viewState ->
-                    viewState?.let{
-                        if(viewState is MainViewState.Home) {
-                            displayHome()
-                        }
-                    }
-                })
 
-        viewModel.onMainViewLoad()
+//            val viewModel = ViewModelProviders
+//                    .of(this, (application as KleanPlayerApp).viewModelProviderFactory)
+//                    .get(MainViewModel::class.java)
+//
+//            viewModel.mainViewLiveData
+//                    .observe(this, Observer<MainViewState> {
+//                        viewState ->
+//                        viewState?.let{
+//                            if(viewState is MainViewState.Home) {
+//                                displayHome()
+//                            }
+//                        }
+//                    })
+//
+//
+//        if(savedInstanceState == null) {
+//            viewModel.onMainViewLoad()
+//        }
+
+        if(savedInstanceState == null) {
+            displayHome()
+        }
+
     }
 
     private fun displayHome() {
@@ -38,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showFragment(fragment: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(
+        fragmentTransaction.replace(
                 R.id.container,
                 fragment
         ).commit()

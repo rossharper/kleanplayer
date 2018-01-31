@@ -4,17 +4,16 @@ import net.rossharper.kleanplayer.home.HomeStreamGateway
 import net.rossharper.kleanplayer.home.domain.HomeStream
 import net.rossharper.kleanplayer.home.domain.Item
 import net.rossharper.kleanplayer.home.domain.Section
+import net.rossharper.kleanplayer.kleanservice.createKleanServiceClient
 import net.rossharper.kleanserviceclient.HomeFetchResult
 import net.rossharper.kleanserviceclient.KleanServiceClient
-import net.rossharper.kleanserviceclient.createKleanServiceClient
 import net.rossharper.kleanserviceclient.datamodel.KleanServiceEntity
 import net.rossharper.kleanserviceclient.datamodel.KleanServiceHomeStream
 import net.rossharper.kleanserviceclient.datamodel.KleanServiceSection
 import net.rossharper.kleanserviceclient.datamodel.KleanServiceShowEntity
 
 fun createHomeStreamGateway(): HomeStreamGateway {
-    val httpGateway = createHttpGateway()
-    val kleanServiceClient = createKleanServiceClient(httpGateway)
+    val kleanServiceClient = createKleanServiceClient()
     return KleanPlayerServiceHomeStreamGateway(kleanServiceClient)
 }
 

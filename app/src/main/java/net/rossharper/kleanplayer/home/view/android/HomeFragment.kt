@@ -57,8 +57,12 @@ class HomeFragment : Fragment() {
             it?.transitionTo()
         }
 
-        viewModel.onHomeViewLoad()
+        if(savedInstanceState == null) {
+            viewModel.onHomeViewLoad()
+        }
     }
+
+
 
     private fun HomeViewState.transitionTo() {
         when(this) {

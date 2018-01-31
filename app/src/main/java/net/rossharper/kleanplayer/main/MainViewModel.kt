@@ -3,7 +3,9 @@ package net.rossharper.kleanplayer.main
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 
-fun createMainViewModel(): MainViewModel = MainViewModel()
+fun createMainViewModel(): MainViewModel {
+  return MainViewModel()
+}
 
 class MainViewModel : ViewModel(), MainViewEventsListener {
 
