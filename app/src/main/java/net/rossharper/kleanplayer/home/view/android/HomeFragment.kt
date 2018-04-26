@@ -7,7 +7,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_home.*
+import net.rossharper.kleanplayer.BuildConfig
 import net.rossharper.kleanplayer.KleanPlayerApp
 import net.rossharper.kleanplayer.R
 import net.rossharper.kleanplayer.home.adapters.AndroidHomeRouter
@@ -60,6 +62,8 @@ class HomeFragment : Fragment() {
         if(savedInstanceState == null) {
             viewModel.onHomeViewLoad()
         }
+
+        Toast.makeText(context, BuildConfig.MYFLAVOR, Toast.LENGTH_SHORT).show()
     }
 
 

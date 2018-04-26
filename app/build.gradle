@@ -20,6 +20,48 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "type"
+
+    productFlavors {
+        dev {
+            buildConfigField("String", "MYFLAVOR", "dev")
+        }
+
+        production {
+            buildConfigField("String", "MYFLAVOR", "production")
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+
+        release {
+            minifyEnabled true
+        }
+
+        internalTest {
+            minifyEnabled true
+        }
+    }
+
+    variantFilter { variant ->
+        def names = variant.flavors*.name
+
+        def variantName = names[0] + "_" + variant.buildType.name
+
+        switch (variantName) {
+            case "dev_debug":
+            case "production_release":
+            case "production_internalTest":
+                break
+            default:
+                variant.ignore = true
+
+        }
+    }
 }
 
 dependencies {
